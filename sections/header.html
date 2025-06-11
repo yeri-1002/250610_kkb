@@ -33,11 +33,17 @@
         </ul>
       </nav>
 
-      <div class="dropdown flex-as-c">
+      <!-- 아이콘 버전 -->
+      <!-- <div class="dropdown flex-as-c">
         <button class="dropBtn">
           <span>관련사이트</span>
           <span class="ico"><i class="fa-solid fa-angle-down"></i></span>
         </button>
+      </div> -->
+
+      <!-- 이미지 버전 -->
+      <div class="dropdown flex-as-c">
+        <button class="dropBtn">관련사이트</button>
       </div>
 
     </div>
@@ -149,10 +155,23 @@
       cursor: pointer;
     }
 
-    header .dropdown .dropBtn .ico {
+    /* 아이콘 버전 */
+    /* header .dropdown .dropBtn .ico {
       display: inline-block;
       margin-left: 5px;
+    } */
+
+    /* 이미지 버전 */
+    header .dropdown .dropBtn::after {
+      content: "";
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background: url(../imgs/svg_line_arrow_down.svg);
+      margin-left: 10px;
+      background-size: 12px 12px;
     }
+
     /* ---------- 헤더 끝 ---------- */
 
   </style>
