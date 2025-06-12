@@ -4,10 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>카카오뱅크 모작</title>
+
+  <!-- 제이쿼리 -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <!-- 폰트어썸 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  
   <link rel="stylesheet" href="../style.css">
-
   <script src="../script.js" defer></script>
 </head>
 
@@ -39,8 +42,8 @@
                                   <li><a href="#" class="block">주주사 소개</a></li>
                                   <li><a href="#" class="block">오시는 길</a></li>
                                   <li><a href="#" class="block">제휴문의</a></li>
-                                  <li><a href="#" class="block">금융기술연구소</a></li>
-                                  <li><a href="#" class="block">카카오뱅크 인증서</a></li>
+                                  <li><a href="#" class="block" target="_blank">금융기술연구소</a></li>
+                                  <li><a href="#" class="block" target="_blank">카카오뱅크 인증서</a></li>
                               </ul>
                           </li>
                           <li>
@@ -57,7 +60,7 @@
                                   <li><a href="#" class="block">입찰공고</a></li>
                               </ul>
                           </li>
-                          <li><a href="#" class="block">인재영입</a></li>
+                          <li><a href="#" class="block" target="_blank">인재영입</a></li>
                       </ul>
                   </div>
               </div>
@@ -109,7 +112,7 @@
                               <a href="#" class="block">IR일정</a>
                               <ul>
                                   <li><a href="#" class="block">IR행사</a></li>
-                                  <li><a href="#" class="block">IR미팅예약</a></li>
+                                  <li><a href="#" class="block" target="_blank">IR미팅예약</a></li>
                                   <li><a href="#" class="block">주주총회</a></li>
                               </ul>
                           </li>
@@ -290,10 +293,10 @@
 
         <div class="dropdown_content is_active">
           <ul>
-            <li><a href="#"><span>카카오뱅크 AD</span></a></li>
-            <li><a href="#"><span>카카오뱅크 인증서</span></a></li>
-            <li><a href="#"><span>금융기술연구소</span></a></li>
-            <li><a href="#"><span>기술블로그</span></a></li>
+            <li><a href="#" target="_blank"><span>카카오뱅크 AD</span></a></li>
+            <li><a href="#" target="_blank"><span>카카오뱅크 인증서</span></a></li>
+            <li><a href="#" target="_blank"><span>금융기술연구소</span></a></li>
+            <li><a href="#" target="_blank"><span>기술블로그</span></a></li>
           </ul>
         </div>
       </div>
@@ -462,6 +465,27 @@
       text-align: center;
     }
 
+    header .menu_box .menu_box-sec_menu ul li a[target="_blank"]::after {
+      content: "";
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-top: -1px;
+      margin-left: 8px;
+      background: url(../imgs/svg_line_outlink.svg);
+      background-size: 14px 14px;
+      /* vertical-align: 수직(세로) 방향(기준이 있음) */
+      vertical-align: middle;
+    }
+
+    header .menu_box .menu_box-sec_menu > ul > li > a[target="_blank"]::after {
+      content: "";
+      width: 18px;
+      height: 18px;
+      background-size: 18px 18px;
+      margin-top: -4px;
+    }
+
     header .menu_box .menu_box-sec_menu > ul ul > li > a {
       display: block;
       margin-bottom: 24px;
@@ -501,7 +525,11 @@
       height: 12px;
       background: url(../imgs/svg_line_arrow_down.svg);
       margin-left: 10px;
-      background-size: 12px 12px;
+      transition: all .3s;
+    }
+
+    header .dropdown .dropBtn.rotate::after {
+      transform: rotate(-180deg);
     }
 
     /* dropdown_content */
@@ -509,7 +537,7 @@
       position: absolute;
       top: 100%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateY(4px);
       border-radius: 6px;
       background-color: #fff;
       margin-top: 33px;
@@ -518,11 +546,13 @@
       box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .12);
       visibility: hidden;
       opacity: 0;
+      transition: all .1s linear;
     }
 
     header .dropdown .dropdown_content.is_active {
       visibility: visible;
       opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
     header .dropdown .dropdown_content a {
@@ -537,8 +567,43 @@
       background-color: #f7f7f7;
     }
 
+    header .dropdown .dropdown_content a[target="_blank"]::after {
+      content: "";
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-top: -3px;
+      margin-left: 8px;
+      background: url(../imgs/svg_line_outlink.svg);
+      background-size: 12px 12px;
+      /* vertical-align: 수직(세로) 방향(기준이 있음) */
+      vertical-align: middle;
+    }
+
     /* ---------- 헤더 끝 ---------- */
 
   </style>
+
+  <script>
+    $('.dropBtn').click(function() {
+      var dropdownContent = $('.dropdown_content');
+      var $this = $(this);
+
+      if(dropdownContent.hasClass('is_active')) {
+        dropdownContent.removeClass('is_active');
+        $(this).removeClass('rotate');
+      }
+
+      else {
+        dropdownContent.addClass('is_active');
+        $(this).addClass('rotate');
+      }
+    });
+
+    // $('.dropBtn').click(function() {
+    //   $('.dropdown_content').toggleClass('is_active');
+    //   $(this).toggleClass('rotate');
+    // });
+  </script>
 </body>
 </html>
