@@ -8,7 +8,11 @@
 <body>
   <!-- ((section.md_sec.md_sec_$.con>div*2)+div.md_divider)*5 -->
   <section class="md_sec md_sec_1 con">
-    <div></div>
+    <div>
+      <h3>모바일로 더 손쉬운
+        계좌개설, 간편한 이체
+      </h3>
+    </div>
     <div></div>
   </section>
   <div class="md_divider"></div>
@@ -37,6 +41,10 @@
   </section>
 
   <style>
+    /* 폰트 */
+    html {
+      
+    }
     /* 노말라이즈 */
     body,
     ul,
@@ -58,6 +66,8 @@
 
     .con {
       width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .ico {
@@ -67,6 +77,28 @@
       display: block;
       /* border: 10px solid red; */
       background-image: url(https://www.kakaobank.com/static/images/web/img_kabang_220615.png);
+    }
+
+    /* 중간섹션 1 ~ 5 시작 */
+    .md_sec {
+      min-height: 500px;
+      border: 10px solid red;
+      display: flex;
+    }
+
+    .md_sec > div:first-child {
+      background-color: pink;
+      width: 60%;
+    }
+
+    .md_sec > div:last-child {
+      background-color: gold;
+      flex-grow: 1;
+    }
+
+    .md_divider {
+      height: 32px;
+      background-color: #fafafa;
     }
   </style>
   
