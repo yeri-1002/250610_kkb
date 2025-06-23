@@ -19,7 +19,10 @@
     <div class="loan_box con-min-width active-on-visible" data-active-on-visible-diff-y="-200" data-active-on-visible-delay="1000">
       <div class="sky">
         <div class="blue"></div>
-        <div class="moon"></div>
+        <div class="moon">
+          <div class="base"></div>
+          <div class="shadow"></div>
+        </div>
         <div class="starts"></div>
       </div>
 
@@ -147,11 +150,49 @@
         height: 0;
         transition: height .85s;
       }
+
+      .loan_box > .sky > .moon {
+        width: 112px;
+        height: 112px;
+        position: absolute;
+        /* outline: 1px solid red; */
+        top: 202px;
+        /* 50% : 가운데로 이동 + 원하는 px값으로 조정 */
+        left: calc(50% + 282px);
+        overflow: hidden;
+      }
+
+      .loan_box > .sky > .moon > .base {
+        width: 110px;
+        height: 110px;
+        background-color: #ffdc00;
+        border-radius: 50%;
+        transition: background-color .85s
+      }
+
+      .loan_box.active > .sky > .moon > .base {
+        background-color: #fff;
+      }
+
+      .loan_box > .sky > .moon > .shadow {
+        width: 100%;
+        height: 100%;
+        background-color: #333b58;
+        position: absolute;
+        top: -100%;
+        left: -100%;
+        border-radius: 50%;
+        transition: top .85s .2s, left .85s .2s;
+      }
+
+      .loan_box.active > .sky > .moon > .shadow {
+        top: -22%;
+        left: -22%;
+      }
       /* 대출 끝 */
     </style>
 
     <script>
-      
     /* 발견되면 활성화시키는 라이브러리 시작 */
     function ActiveOnVisible__init() {
       $('.active-on-visible').each(function(index, node) {
