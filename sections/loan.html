@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
+    <!-- 제이쿼리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+     <!-- lodash -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+
     <link rel="stylesheet" href="../style.css" />
     <script src="../script.js" defer></script>
   </head>
 
   <body>
-    <div class="loan_box con-min-width">
+    <div class="loan_box con-min-width active-on-visible" data-active-on-visible-diff-y="-200" data-active-on-visible-delay="1000">
       <div class="sky">
         <div class="blue"></div>
         <div class="moon"></div>
@@ -110,10 +116,14 @@
       .loan_box {
         background-color: #333b58;
         position: relative;
-        z-index: 0;
 
         /* 임시 */
         height: 500px;
+        margin-top: 1000px;
+      }
+
+      .loan_box > .con {
+        position: relative;
       }
 
       .loan_box > .sky  {
@@ -122,7 +132,6 @@
         height: 100%;
         top: 0;
         left: 0;
-        z-index: -1;
       }
 
       .loan_box > .sky > .blue {
@@ -134,11 +143,132 @@
         background-color: #559cde;
       }
 
-      .loan_box:hover > .sky > .blue {
+      .loan_box.active > .sky > .blue {
         height: 0;
         transition: height .85s;
       }
       /* 대출 끝 */
     </style>
+
+    <script>
+      
+    /* 발견되면 활성화시키는 라이브러리 시작 */
+    function ActiveOnVisible__init() {
+      $('.active-on-visible').each(function(index, node) {
+        var $node = $(node);
+
+        var onFuncName = $node.attr('data-active-on-visible-on-func-name');
+        var offFuncName = $node.attr('data-active-on-visible-off-func-name');
+
+        $node.data('data-active-on-visible-on-func-name', onFuncName);
+        $node.data('data-active-on-visible-off-func-name', offFuncName);
+    });
+
+      $(window).resize(_.debounce(ActiveOnVisible__initOffset, 500));
+      ActiveOnVisible__initOffset();
+
+      $(window).scroll(_.debounce(ActiveOnVisible__checkAndActive, 50));
+      ActiveOnVisible__checkAndActive();
+    }
+
+    function ActiveOnVisible__initOffset() {
+      var windowHeight = $(window).height();
+
+      $('.active-on-visible:not(.actived)').each(function(index, node) {
+        var $node = $(node);
+
+        var offsetTop = $node.offset().top;
+
+        var matrix = $node.css('transform').replace(/[^0-9\-.,]/g, '').split(',')
+        var translateX = matrix[12] || matrix[4];
+        var translateY = matrix[13] || matrix[5];
+
+        if ( translateY ) {
+          offsetTop -= translateY;
+        }
+
+        $node.attr('data-active-on-visible-offsetTop', offsetTop);
+        $node.data('data-active-on-visible-offsetTop', offsetTop);
+
+        if ( !$node.attr('data-active-on-visible-diff-y') ) {
+          $node.attr('data-active-on-visible-diff-y', '0');
+        }
+
+        if ( !$node.attr('data-active-on-visible-delay') ) {
+          $node.attr('data-active-on-visible-delay', '0');
+        }
+
+        var diffY = $node.attr('data-active-on-visible-diff-y');
+        var delay = $node.attr('data-active-on-visible-delay');
+
+        if ( diffY.substr(-2, 2) == 'vh' ) {
+          diffY = parseInt(diffY);
+
+          diffY = windowHeight * (diffY / 100);
+        }
+        else if ( diffY.substr(-1, 1) == '%' ) {
+          diffY = parseInt(diffY);
+
+          diffY = $node.height() * (diffY / 100);
+        }
+        else {
+          diffY = parseInt(diffY);
+        }
+
+        $node.attr('data-active-on-visible-diff-y-real', diffY);
+        $node.data('data-active-on-visible-diff-y', diffY);
+        $node.data('data-active-on-visible-delay', delay);
+      });
+
+    ActiveOnVisible__checkAndActive();
+  }
+
+  function ActiveOnVisible__checkAndActive() {
+    $('.active-on-visible:not(.actived)').each(function(index, node) {
+      var $node = $(node);
+
+      var offsetTop = $node.data('data-active-on-visible-offsetTop') * 1;
+      var diffY = parseInt($node.data('data-active-on-visible-diff-y'));
+      var delay = parseInt($node.data('data-active-on-visible-delay'));
+
+      var onFuncName = $node.data('data-active-on-visible-on-func-name');
+      var offFuncName = $node.data('data-active-on-visible-off-func-name');
+
+      var scrollTop = $(window).scrollTop();
+      var windowHeight = $(window).height();
+      var nodeHeight = $node.height();
+
+      if ( scrollTop + windowHeight + diffY > offsetTop ) {
+        setTimeout(function() {
+          if ( $node.hasClass('active') == false ) {
+            $node.addClass('active');
+
+          if ( $node.hasClass('can-active-once') ) {
+            $node.addClass('actived');
+          }
+
+          if ( window[onFuncName] ) {
+            window[onFuncName]($node);
+          }
+        }
+      }, delay);
+    }
+    else {
+      if ( $node.hasClass('active') ) {
+        $node.removeClass('active');
+
+        if ( window[offFuncName] ) {
+          window[offFuncName]($node);
+        }
+      }
+    }
+  });
+}
+
+$(function() {
+  ActiveOnVisible__init();
+})
+/* 발견되면 활성화시키는 라이브러리 끝 */
+    </script>
   </body>
 </html>
