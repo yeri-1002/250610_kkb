@@ -30,6 +30,19 @@
             <img src="../imgs/home_arr.png" alt="">
           </a>
         </div>
+
+        <div class="slider_box">
+          <div class="arrows">
+            <div><img src="../imgs/img-left.png" alt=""></div>
+            <div><img src="../imgs/img-right.png" alt=""></div>
+          </div>
+
+          <div class="slides">
+            <div><img src="../imgs/card-1.png" alt=""></div>
+            <div class="center"><img src="../imgs/card-2.png" alt=""></div>
+            <div><img src="../imgs/card-3.png" alt=""></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -172,6 +185,53 @@
         height: 9px;
         margin: 2.5px 0 0 8px;
       }
+
+      /* 슬라이드 박스 시작 */
+      .checkcard_box .slider_box {
+        position: relative;
+      }
+
+      .checkcard_box .slider_box .slides {
+        display: flex;
+        justify-content: center;
+      }
+
+      .checkcard_box .slider_box .slides > div > img {
+        display: block;
+        width: 240px;
+      }
+
+      .checkcard_box .slider_box .slides > div.center {
+        margin-left: -80px;
+        margin-right: -80px;
+        position: relative;
+        /* position을 작성해야 z-index 의미가 있다. */
+        z-index: 1;
+      }
+
+      .checkcard_box .slider_box .slides > div.center > img {
+        transform: scale(1.2);
+      }
+
+      .checkcard_box .slider_box .arrows div {
+        position: absolute;
+        top: 50%;
+        left: 30px;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+
+      .checkcard_box .slider_box .arrows div:last-child {
+        left: auto;
+        right: 30px;
+      }
+
+      /* 클릭했을 때 css로 active가 가능하다. */
+      .checkcard_box .slider_box .arrows div:active {
+        transform: translateY(-45%);
+      }
+      /* 슬라이드 박스 끝 */
+
       /* 체크카드 끝 */
     </style>
   </body>
