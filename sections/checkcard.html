@@ -7,11 +7,15 @@
 
     <!-- 제이쿼리 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <!-- 폰트어썸 -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    />
+    <!-- 제이쿼리 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- 슬릭 슬라이더 불러오기 -->
+    <!-- 무조건 제이쿼리 밑에다 놔야함 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+
 
     <link rel="stylesheet" href="../style.css" />
     <script src="../script.js" defer></script>
@@ -33,15 +37,33 @@
 
         <div class="slider_box">
           <div class="arrows">
-            <div><img src="../imgs/img-left.png" alt=""></div>
-            <div><img src="../imgs/img-right.png" alt=""></div>
+            <div class="btn_arrow_left"><img src="../imgs/img-left.png" alt=""></div>
+            <div class="btn_arrow_right"><img src="../imgs/img-right.png" alt=""></div>
           </div>
 
-          <div class="slides">
+          <div class="slick">
+            <div class="item">
+              <div class="img-box"><img src="/imgs/card-1.png" alt=""></div>
+            </div>
+            <div class="item">
+              <div class="img-box"><img src="/imgs/card-2.png" alt=""></div>
+            </div>
+            <div class="item">
+              <div class="img-box"><img src="/imgs/card-3.png" alt=""></div>
+            </div>
+            <div class="item">
+              <div class="img-box"><img src="/imgs/card-4.png" alt=""></div>
+            </div>
+            <div class="item">
+              <div class="img-box"><img src="/imgs/card-5.png" alt=""></div>
+            </div>
+          </div>
+
+          <!-- <div class="slides">
             <div><img src="../imgs/card-1.png" alt=""></div>
             <div class="center"><img src="../imgs/card-2.png" alt=""></div>
             <div><img src="../imgs/card-3.png" alt=""></div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -186,44 +208,34 @@
         margin: 2.5px 0 0 8px;
       }
 
-      /* 슬라이드 박스 시작 */
+      /* 슬라이드 시작 */
       .checkcard_box .slider_box {
         position: relative;
+        width: 660px;
+        margin: 80px auto 0;
       }
 
-      .checkcard_box .slider_box .slides {
-        display: flex;
-        justify-content: center;
+      .checkcard_box .slider_box .slick .item > .img-box {
+        padding-top: 30px;
+        padding-bottom: 30px;
       }
 
-      .checkcard_box .slider_box .slides > div > img {
-        display: block;
-        width: 240px;
-      }
 
-      .checkcard_box .slider_box .slides > div.center {
-        margin-left: -80px;
-        margin-right: -80px;
-        position: relative;
-        /* position을 작성해야 z-index 의미가 있다. */
-        z-index: 1;
-      }
-
-      .checkcard_box .slider_box .slides > div.center > img {
-        transform: scale(1.2);
+      .checkcard_box .slider_box .slick .item.slick-center {
+        transform: scale(1.17);
       }
 
       .checkcard_box .slider_box .arrows div {
         position: absolute;
         top: 50%;
-        left: 30px;
+        right: calc(100% + 150px);
         transform: translateY(-50%);
         cursor: pointer;
       }
 
       .checkcard_box .slider_box .arrows div:last-child {
-        left: auto;
-        right: 30px;
+        right: auto;
+        left: calc(100% + 150px);
       }
 
       /* 클릭했을 때 css로 active가 가능하다. */
@@ -234,4 +246,32 @@
 
       /* 체크카드 끝 */
     </style>
+
+    <script>
+      function SliderBox1__init() {
+        $('.slider_box > .slick').slick({
+          // 페이지 밑에 점을 표시할 것인지 : dots
+          dots: false,
+          autoplay: false,
+          /* 자동으로 슬라이드 넘길 때 몇초 간격으로 넘길건지
+          autoplaySpeed: 5000,
+          */
+          // pauseOnHover:false,
+
+          // 한 화면에 몇개 보여줄건지
+          slidesToShow: 3,
+          // 넘겨질 슬라이드 갯수
+          slidesToScroll: 1,
+          // 가운데 정렬
+          centerMode:true,
+          // 좌우 여백
+          centerPadding:0,
+          arrows:true,
+          preArrow: ".slider_box > .arrows > .btn_arrow_left",
+          nextArrow: ".slider_box > .arrows > .btn_arrow_right"
+        });
+      }
+
+      SliderBox1__init();
+    </script>
   </body>
