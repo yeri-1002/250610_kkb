@@ -18,7 +18,7 @@
             <li><a href="#">카카오뱅크 서비스 이용약관</a></li>
             <li><a href="#"><strong>개인정보처리방침</strong></a></li>
             <li><a href="#">신용정보활용체제</a></li>
-            <li><a href="#">전자서명인증업무준칙</a></li>
+            <li class="bar"><a href="#">전자서명인증업무준칙</a></li>
             <br>
             <li class="pd"><a href="#"><strong>전자민원접수</strong></a></li>
             <li><a href="#">보호금융상품등록부</a></li>
@@ -36,10 +36,41 @@
         <span class="txt-tel">(해외 +82-2-6420-3333)</span>
         <div class="info-copyright">Copyright © KakaoBank Corp. All rights reserved.</div>
       </div>
+
+      <div class="box-3 flex flex-ai-c">
+        <div class="license-01">
+          <a href="#" class="flex flex-ai-c">
+            <img src="../imgs/webaccessibility.png" alt="">
+            <span>웹 접근성 품질인증</span>
+          </a>
+        </div>
+        
+        <div class="license-02">
+          <a href="#" class="flex flex-ai-c">
+            <img src="../imgs/web_trust_seal.png" alt="">
+            <span>웹 트러스트 인증</span>
+          </a>
+        </div>
+
+        <div class="flex-grow-1"></div>
+
+        <nav class="menu-box-2">
+          <ul class="flex">
+            <li><a href="#"><span class="block ico-sns ico-sns-facebook"></span></a></li>
+            <li><a href="#"><span class="block ico-sns ico-sns-instagram"></span></a></li>
+            <li><a href="#"><span class="block ico-sns ico-sns-youtube"></span></a></li>
+            <li><a href="#"><span class="block ico-sns ico-sns-brunch"></span></a></li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </footer>
 
   <style>
+    @font-face {
+      font-family: "KopubWorld Dotum", Sans-serif;
+      src: url(/KOPUBWORLD_TTF/KoPubWorld_Dotum_Medium.ttf) format(ttf);
+    }
     /* 노말라이즈 */
     body, ul, li {
       margin: 0;
@@ -131,6 +162,7 @@
     /* footer 시작 */
     footer {
       background-color: #eee;
+      font-family: "KopubWorld Dotum", Sans-serif;
     }
 
     footer .box-1 {
@@ -145,7 +177,7 @@
       position: relative;
     }
 
-    footer .box-1 > .menu-box > ul > li:not(:first-child)::after {
+    footer .box-1 > .menu-box > ul > li:not(:first-child)::after{
       content: "";
       background-color: #d8d8d8;
       width: 1px;
@@ -186,6 +218,75 @@
       margin-top: 6px;
       font-size: 11px;
     }
+
+    footer .box-3  {
+      padding: 12px 0 18px;
+      color: #666;
+    }
+
+    footer .box-3 .license-01 span,
+    footer .box-3 .license-02 span {
+      font-size: 13px;
+      margin-left: 8px;
+      font-weight: bold;
+    }
+
+    footer .box-3 .license-01 img {
+      width: 46px;
+    }
+
+    footer .box-3 .license-02 {
+      margin-left: 20px;
+    }
+
+    footer .box-3 .license-02 img {
+      width: 42px;
+    }
+
+    footer .box-3 .menu-box-2 > ul {
+      margin-right: 155px;
+    }
+
+    footer .box-3 .menu-box-2 > ul > li {
+      margin-left: 4px;
+    }
+
+    footer .box-3 .menu-box-2 > ul > li:nth-child(2) {
+      margin-right: 8px;
+    }
+
+    footer .box-3 .menu-box-2 > ul > li:nth-child(3) {
+      margin-right: 6px;
+    }
+
+    footer .box-3 .menu-box-2 > ul > li > a {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+
+    footer .box-3 .menu-box-2 .ico-sns {
+      height: 100%;
+      background: url(/imgs/ico_sns.png);
+    }
+
+    footer .box-3 .menu-box-2 .ico-sns-facebook {
+      background-position: 0 -90px;
+    }
+
+    footer .box-3 .menu-box-2 .ico-sns-instagram {
+      background-position: -191px -138px;
+      padding-right: 10px;
+    }
+
+    footer .box-3 .menu-box-2 .ico-sns-youtube {
+      background-position: -90px -90px;
+    }
+
+    footer .box-3 .menu-box-2 .ico-sns-brunch {
+      background-position: -217px -138px;
+    }
+    /* 푸터 끝 */
   </style>
 </body>
 </html>
